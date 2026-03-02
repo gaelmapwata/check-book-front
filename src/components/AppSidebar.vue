@@ -25,6 +25,9 @@ const drawer = ref(true)
 
 const menuItems = [
   { title: 'Dashboard', icon: 'mdi-view-dashboard-outline', route: '/' },
+  { title: 'Ressources', icon: 'mdi-database-outline', route: '/ressources' },
+  { title: 'Permissions', icon: 'mdi-shield-key', route: '/permissions' },
+  { title: 'Roles', icon: 'mdi-shield-account-outline', route: '/roles' },
   { title: 'Users', icon: 'mdi-account-group-outline', route: '/users' },
   { title: 'Transactions', icon: 'mdi-bank-transfer', route: '/transactions' },
   { title: 'Reports', icon: 'mdi-chart-bar', route: '/reports' },

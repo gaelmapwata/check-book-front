@@ -2,6 +2,9 @@ import { createRouter, createWebHistory } from 'vue-router'
 import LoginView from '@/modules/auth/views/LoginView.vue'
 import DashboardLayout from '@/layouts/DashboardLayout.vue'
 import DashboardHome from '@/modules/dashboard/views/DashboardHome.vue'
+import RessourcesView from '@/modules/ressources/views/RessourcesView.vue'
+import PermissionsView from '@/modules/permissions/views/PermissionsView.vue'
+import RolesView from '@/modules/roles/views/RolesView.vue'
 
 const routes = [
   {
@@ -15,6 +18,18 @@ const routes = [
       {
         path: '',
         component: DashboardHome,
+      },
+      {
+        path: 'ressources',
+        component: RessourcesView,
+      },
+      {
+        path: 'permissions',
+        component: PermissionsView,
+      },
+      {
+        path: 'roles',
+        component: RolesView,
       },
     ],
   },
