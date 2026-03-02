@@ -122,9 +122,7 @@
                   :disabled="!permission.canUpdatePermissions"
                 >
                   <v-icon>mdi-link-multiple</v-icon>
-                  <v-tooltip activator="parent" location="top">
-                    Associer les rôles
-                  </v-tooltip>
+                  <v-tooltip activator="parent" location="top"> Associer les rôles </v-tooltip>
                 </v-btn>
                 <v-btn
                   icon
