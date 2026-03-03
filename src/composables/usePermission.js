@@ -20,6 +20,33 @@ const PERMISSIONS = {
     UPDATE: 'ROLE:UPDATE',
     DELETE: 'ROLE:DELETE',
   },
+  COUNTRY: {
+    READ: 'COUNTRY:READ',
+    CREATE: 'COUNTRY:CREATE',
+    UPDATE: 'COUNTRY:UPDATE',
+    DELETE: 'COUNTRY:DELETE',
+  },
+  BANK: {
+    READ: 'BANK:READ',
+    CREATE: 'BANK:CREATE',
+    UPDATE: 'BANK:UPDATE',
+    DELETE: 'BANK:DELETE',
+  },
+  BRANCH: {
+    READ: 'Branch:READ',
+    CREATE: 'Branch:CREATE',
+    UPDATE: 'Branch:UPDATE',
+    DELETE: 'Branch:DELETE',
+  },
+  USER: {
+    READ: 'USER:READ',
+    CREATE: 'USER:CREATE',
+    UPDATE: 'USER:UPDATE',
+    DELETE: 'USER:DELETE',
+    LOCK: 'USER:LOCK',
+    UNLOCK: 'USER:UNLOCK',
+    VALIDATE: 'USER:VALIDATE',
+  },
 }
 
 const userPermissions = ref([])
@@ -91,6 +118,71 @@ export const usePermission = () => {
     isAdmin.value && hasPermission(PERMISSIONS.ROLE.DELETE),
   )
 
+  // Vérifier les permissions pour COUNTRY
+  const canReadCountry = computed(() =>
+    isAdmin.value && hasPermission(PERMISSIONS.COUNTRY.READ),
+  )
+  const canCreateCountry = computed(() =>
+    isAdmin.value && hasPermission(PERMISSIONS.COUNTRY.CREATE),
+  )
+  const canUpdateCountry = computed(() =>
+    isAdmin.value && hasPermission(PERMISSIONS.COUNTRY.UPDATE),
+  )
+  const canDeleteCountry = computed(() =>
+    isAdmin.value && hasPermission(PERMISSIONS.COUNTRY.DELETE),
+  )
+
+  // Vérifier les permissions pour BANK
+  const canReadBank = computed(() =>
+    isAdmin.value && hasPermission(PERMISSIONS.BANK.READ),
+  )
+  const canCreateBank = computed(() =>
+    isAdmin.value && hasPermission(PERMISSIONS.BANK.CREATE),
+  )
+  const canUpdateBank = computed(() =>
+    isAdmin.value && hasPermission(PERMISSIONS.BANK.UPDATE),
+  )
+  const canDeleteBank = computed(() =>
+    isAdmin.value && hasPermission(PERMISSIONS.BANK.DELETE),
+  )
+
+  // Vérifier les permissions pour BRANCH
+  const canReadBranch = computed(() =>
+    isAdmin.value && hasPermission(PERMISSIONS.BRANCH.READ),
+  )
+  const canCreateBranch = computed(() =>
+    isAdmin.value && hasPermission(PERMISSIONS.BRANCH.CREATE),
+  )
+  const canUpdateBranch = computed(() =>
+    isAdmin.value && hasPermission(PERMISSIONS.BRANCH.UPDATE),
+  )
+  const canDeleteBranch = computed(() =>
+    isAdmin.value && hasPermission(PERMISSIONS.BRANCH.DELETE),
+  )
+
+  // Vérifier les permissions pour USER
+  const canReadUser = computed(() =>
+    isAdmin.value && hasPermission(PERMISSIONS.USER.READ),
+  )
+  const canCreateUser = computed(() =>
+    isAdmin.value && hasPermission(PERMISSIONS.USER.CREATE),
+  )
+  const canUpdateUser = computed(() =>
+    isAdmin.value && hasPermission(PERMISSIONS.USER.UPDATE),
+  )
+  const canDeleteUser = computed(() =>
+    isAdmin.value && hasPermission(PERMISSIONS.USER.DELETE),
+  )
+  const canLockUser = computed(() =>
+    isAdmin.value && hasPermission(PERMISSIONS.USER.LOCK),
+  )
+  const canUnlockUser = computed(() =>
+    isAdmin.value && hasPermission(PERMISSIONS.USER.UNLOCK),
+  )
+  const canValidateUser = computed(() =>
+    isAdmin.value && hasPermission(PERMISSIONS.USER.VALIDATE),
+  )
+
   return {
     PERMISSIONS,
     userPermissions,
@@ -110,5 +202,24 @@ export const usePermission = () => {
     canCreateRole,
     canUpdateRole,
     canDeleteRole,
+    canReadCountry,
+    canCreateCountry,
+    canUpdateCountry,
+    canDeleteCountry,
+    canReadBank,
+    canCreateBank,
+    canUpdateBank,
+    canDeleteBank,
+    canReadBranch,
+    canCreateBranch,
+    canUpdateBranch,
+    canDeleteBranch,
+    canReadUser,
+    canCreateUser,
+    canUpdateUser,
+    canDeleteUser,
+    canLockUser,
+    canUnlockUser,
+    canValidateUser,
   }
 }

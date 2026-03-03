@@ -146,4 +146,128 @@ export const deleteRole = async (id) => {
   return response.data
 }
 
+// Country endpoints
+export const fetchCountries = async () => {
+  const response = await api.get('/countries')
+  return response.data
+}
+
+export const getCountryById = async (id) => {
+  const response = await api.get(`/countries/${id}`)
+  return response.data
+}
+
+export const createCountry = async (payload) => {
+  const response = await api.post('/countries', payload)
+  return response.data
+}
+
+export const updateCountry = async (id, payload) => {
+  const response = await api.put(`/countries/${id}`, payload)
+  return response.data
+}
+
+export const deleteCountry = async (id) => {
+  const response = await api.delete(`/countries/${id}`)
+  return response.data
+}
+
+// Bank endpoints
+export const fetchBanks = async () => {
+  const response = await api.get('/banks')
+  return response.data
+}
+
+export const getBankById = async (id) => {
+  const response = await api.get(`/banks/${id}`)
+  return response.data
+}
+
+export const createBank = async (payload) => {
+  const response = await api.post('/banks', payload)
+  return response.data
+}
+
+export const updateBank = async (id, payload) => {
+  const response = await api.put(`/banks/${id}`, payload)
+  return response.data
+}
+
+export const deleteBank = async (id) => {
+  const response = await api.delete(`/banks/${id}`)
+  return response.data
+}
+
+// Branch endpoints
+export const fetchBranches = async () => {
+  const response = await api.get('/branches')
+  return response.data
+}
+
+export const getBranchById = async (id) => {
+  const response = await api.get(`/branches/${id}`)
+  return response.data
+}
+
+export const createBranch = async (payload) => {
+  const response = await api.post('/branches', payload)
+  return response.data
+}
+
+export const updateBranch = async (id, payload) => {
+  const response = await api.put(`/branches/${id}`, payload)
+  return response.data
+}
+
+export const deleteBranch = async (id) => {
+  const response = await api.delete(`/branches/${id}`)
+  return response.data
+}
+
+// User endpoints
+export const fetchUsers = async () => {
+  const response = await api.get('/users')
+  return response.data
+}
+
+export const getUserById = async (id) => {
+  const response = await api.get(`/users/${id}`)
+  return response.data
+}
+
+export const createUser = async (payload) => {
+  const response = await api.post('/users', payload)
+  return response.data
+}
+
+export const updateUser = async (id, payload) => {
+  const response = await api.put(`/users/${id}`, payload)
+  return response.data
+}
+
+export const deleteUser = async (id) => {
+  const response = await api.delete(`/users/${id}`)
+  return response.data
+}
+
+export const lockUser = async (id) => {
+  const response = await api.post(`/users/${id}/lock`)
+  return response.data
+}
+
+export const unlockUser = async (id) => {
+  const response = await api.post(`/users/${id}/unlock`)
+  return response.data
+}
+
+export const validateUser = async (id) => {
+  const response = await api.post(`/users/${id}/validate`)
+  return response.data
+}
+
+export const addRolesToUser = async (id, roleIds) => {
+  const response = await api.post(`/users/${id}/roles`, roleIds)
+  return response.data
+}
+
 export default api
