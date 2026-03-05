@@ -11,12 +11,9 @@
         size="large"
         prepend-icon="mdi-plus"
         @click="openCreateDialog"
-        :disabled="store.loading || !permission.canCreate"
+        :disabled="store.loading"
       >
         Nouvelle Ressource
-        <v-tooltip v-if="!permission.canCreate" activator="parent" location="bottom">
-          ⛔ Vous n'avez pas les permissions pour créer
-        </v-tooltip>
       </v-btn>
     </div>
 

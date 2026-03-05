@@ -32,7 +32,5 @@ const menuItems = [
   { title: 'Banks', icon: 'mdi-bank', route: '/banks' },
   { title: 'Branches', icon: 'mdi-bank-outline', route: '/branches' },
   { title: 'Users', icon: 'mdi-account-group-outline', route: '/users' },
-  { title: 'Transactions', icon: 'mdi-bank-transfer', route: '/transactions' },
-  { title: 'Reports', icon: 'mdi-chart-bar', route: '/reports' },
 ]
 </script>

@@ -132,6 +132,7 @@ const handleOtpVerify = async () => {
     const data = await verifyOtp(otp.value, passwordToken.value)
     localStorage.setItem('token', data.token)
     errorMessage.value = ''
+    // Router.push va déclencher App.vue qui va charger automatiquement les permissions
     router.push('/')
   } catch (err) {
     console.error(err)

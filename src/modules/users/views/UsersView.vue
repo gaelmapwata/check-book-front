@@ -11,12 +11,9 @@
         size="large"
         prepend-icon="mdi-plus"
         @click="openCreateDialog"
-        :disabled="store.loading || !permission.canCreateUser"
+        :disabled="store.loading"
       >
         Nouvel Utilisateur
-        <v-tooltip v-if="!permission.canCreateUser" activator="parent" location="bottom">
-          ⛔ Vous n'avez pas les permissions pour créer
-        </v-tooltip>
       </v-btn>
     </div>
 
@@ -101,7 +98,7 @@
               <span v-else class="text-grey">---</span>
             </td>
             <td>
-              <v-chip v-if="user.isLocked" size="small" color="error" variant="tonal">
+              <v-chip v-if="user.locked" size="small" color="error" variant="tonal">
                 <template #prepend>
                   <v-icon>mdi-lock</v-icon>
                 </template>
@@ -115,7 +112,7 @@
               </v-chip>
             </td>
             <td>
-              <v-chip v-if="user.isValidated" size="small" color="primary" variant="tonal">
+              <v-chip v-if="user._validated" size="small" color="primary" variant="tonal">
                 <template #prepend>
                   <v-icon>mdi-check</v-icon>
                 </template>
@@ -139,7 +136,7 @@
                     <span>Éditer</span>
                   </v-list-item>
                   <v-list-item
-                    v-if="!user.isLocked"
+                    v-if="!user.locked"
                     @click="lockUserConfirm(user)"
                     :disabled="!permission.canLockUser"
                   >
@@ -155,7 +152,7 @@
                     <span>Déverrouiller</span>
                   </v-list-item>
                   <v-list-item
-                    v-if="!user.isValidated"
+                    v-if="!user._validated"
                     @click="validateUserConfirm(user)"
                     :disabled="!permission.canValidateUser"
                   >
@@ -308,8 +305,8 @@ const headers = [
   { text: 'ID', value: 'id' },
   { text: 'Email', value: 'email' },
   { text: 'Branche', value: 'branchName' },
-  { text: 'Statut', value: 'isLocked' },
-  { text: 'Validation', value: 'isValidated' },
+  { text: 'Statut', value: 'locked' },
+  { text: 'Validation', value: '_validated' },
 ]
 
 const showDialog = ref(false)

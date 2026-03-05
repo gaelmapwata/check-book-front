@@ -11,12 +11,9 @@
         size="large"
         prepend-icon="mdi-plus"
         @click="openCreateDialog"
-        :disabled="store.loading || !permission.canCreateRole"
+        :disabled="store.loading"
       >
         Nouveau Rôle
-        <v-tooltip v-if="!permission.canCreateRole" activator="parent" location="bottom">
-          ⛔ Vous n'avez pas les permissions pour créer
-        </v-tooltip>
       </v-btn>
     </div>
 

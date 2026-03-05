@@ -11,12 +11,9 @@
         size="large"
         prepend-icon="mdi-plus"
         @click="openCreateDialog"
-        :disabled="store.loading || !permission.canCreateBranch"
+        :disabled="store.loading"
       >
         Nouvelle Branche
-        <v-tooltip v-if="!permission.canCreateBranch" activator="parent" location="bottom">
-          ⛔ Vous n'avez pas les permissions pour créer
-        </v-tooltip>
       </v-btn>
     </div>
 

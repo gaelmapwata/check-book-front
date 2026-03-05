@@ -125,10 +125,18 @@ export const useUserStore = defineStore('user', () => {
     error.value = null
     try {
       const updated = await lockUser(id)
+      console.log('API lock response:', updated)
       const index = users.value.findIndex((u) => u.id === id)
       if (index !== -1) {
-        users.value[index] = updated
+        // Si la réponse contient un objet utilisateur complet
+        if (updated && typeof updated === 'object' && updated.id) {
+          users.value[index] = updated
+        } else {
+          // Sinon, marquer le serveur comme étant verrouillé directement
+          users.value[index].isLocked = true
+        }
       }
+      console.log('Updated user in store:', users.value[index])
       return updated
     } catch (err) {
       error.value = err.response?.data?.message || 'Erreur lors du verrouillage'
@@ -145,7 +153,13 @@ export const useUserStore = defineStore('user', () => {
       const updated = await unlockUser(id)
       const index = users.value.findIndex((u) => u.id === id)
       if (index !== -1) {
-        users.value[index] = updated
+        // Si la réponse contient un objet utilisateur complet
+        if (updated && typeof updated === 'object' && updated.id) {
+          users.value[index] = updated
+        } else {
+          // Sinon, marquer le serveur comme étant déverrouillé directement
+          users.value[index].isLocked = false
+        }
       }
       return updated
     } catch (err) {

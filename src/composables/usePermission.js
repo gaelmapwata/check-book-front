@@ -59,7 +59,9 @@ export const usePermission = () => {
 
     try {
       const payload = JSON.parse(atob(token.split('.')[1]))
-      userRole.value = payload.role || payload.authorities?.[0]
+      console.log('Token payload:', payload)
+
+      userRole.value = payload.role || payload.authorities?.[0] || null
       userPermissions.value = payload.authorities || payload.permissions || []
     } catch (err) {
       console.error('Error decoding token:', err)
@@ -73,114 +75,121 @@ export const usePermission = () => {
 
   // Vérifier si l'utilisateur a le rôle ADMIN
   const isAdmin = computed(() => {
-    return userRole.value === 'ADMIN' || userPermissions.value.includes('ROLE_ADMIN')
+    const result =
+      userRole.value === 'ADMIN' ||
+      userRole.value?.toUpperCase() === 'ADMIN' ||
+      userPermissions.value.includes('ROLE_ADMIN') ||
+      userPermissions.value.includes('ADMIN') ||
+      userPermissions.value.some(p => p.toUpperCase().includes('ADMIN'))
+
+    return result
   })
 
   // Vérifier les permissions pour RESSOURCE
   const canRead = computed(() =>
-    isAdmin.value && hasPermission(PERMISSIONS.RESSOURCE.READ),
+    isAdmin.value || hasPermission(PERMISSIONS.RESSOURCE.READ),
   )
   const canCreate = computed(() =>
-    isAdmin.value && hasPermission(PERMISSIONS.RESSOURCE.CREATE),
+    isAdmin.value || hasPermission(PERMISSIONS.RESSOURCE.CREATE),
   )
   const canUpdate = computed(() =>
-    isAdmin.value && hasPermission(PERMISSIONS.RESSOURCE.UPDATE),
+    isAdmin.value || hasPermission(PERMISSIONS.RESSOURCE.UPDATE),
   )
   const canDelete = computed(() =>
-    isAdmin.value && hasPermission(PERMISSIONS.RESSOURCE.DELETE),
+    isAdmin.value || hasPermission(PERMISSIONS.RESSOURCE.DELETE),
   )
 
   // Vérifier les permissions pour PERMISSION
   const canReadPermissions = computed(() =>
-    isAdmin.value && hasPermission(PERMISSIONS.PERMISSION.READ),
+    isAdmin.value || hasPermission(PERMISSIONS.PERMISSION.READ),
   )
   const canCreatePermissions = computed(() =>
-    isAdmin.value && hasPermission(PERMISSIONS.PERMISSION.CREATE),
+    isAdmin.value || hasPermission(PERMISSIONS.PERMISSION.CREATE),
   )
   const canUpdatePermissions = computed(() =>
-    isAdmin.value && hasPermission(PERMISSIONS.PERMISSION.UPDATE),
+    isAdmin.value || hasPermission(PERMISSIONS.PERMISSION.UPDATE),
   )
   const canDeletePermissions = computed(() =>
-    isAdmin.value && hasPermission(PERMISSIONS.PERMISSION.DELETE),
+    isAdmin.value || hasPermission(PERMISSIONS.PERMISSION.DELETE),
   )
 
   // Vérifier les permissions pour ROLE
   const canReadRole = computed(() =>
-    isAdmin.value && hasPermission(PERMISSIONS.ROLE.READ),
+    isAdmin.value || hasPermission(PERMISSIONS.ROLE.READ),
   )
   const canCreateRole = computed(() =>
-    isAdmin.value && hasPermission(PERMISSIONS.ROLE.CREATE),
+    isAdmin.value || hasPermission(PERMISSIONS.ROLE.CREATE),
   )
   const canUpdateRole = computed(() =>
-    isAdmin.value && hasPermission(PERMISSIONS.ROLE.UPDATE),
+    isAdmin.value || hasPermission(PERMISSIONS.ROLE.UPDATE),
   )
   const canDeleteRole = computed(() =>
-    isAdmin.value && hasPermission(PERMISSIONS.ROLE.DELETE),
+    isAdmin.value || hasPermission(PERMISSIONS.ROLE.DELETE),
   )
 
   // Vérifier les permissions pour COUNTRY
   const canReadCountry = computed(() =>
-    isAdmin.value && hasPermission(PERMISSIONS.COUNTRY.READ),
+    isAdmin.value || hasPermission(PERMISSIONS.COUNTRY.READ),
   )
   const canCreateCountry = computed(() =>
-    isAdmin.value && hasPermission(PERMISSIONS.COUNTRY.CREATE),
+    isAdmin.value || hasPermission(PERMISSIONS.COUNTRY.CREATE),
   )
   const canUpdateCountry = computed(() =>
-    isAdmin.value && hasPermission(PERMISSIONS.COUNTRY.UPDATE),
+    isAdmin.value || hasPermission(PERMISSIONS.COUNTRY.UPDATE),
   )
   const canDeleteCountry = computed(() =>
-    isAdmin.value && hasPermission(PERMISSIONS.COUNTRY.DELETE),
+    isAdmin.value || hasPermission(PERMISSIONS.COUNTRY.DELETE),
   )
 
   // Vérifier les permissions pour BANK
   const canReadBank = computed(() =>
-    isAdmin.value && hasPermission(PERMISSIONS.BANK.READ),
+    isAdmin.value || hasPermission(PERMISSIONS.BANK.READ),
   )
   const canCreateBank = computed(() =>
-    isAdmin.value && hasPermission(PERMISSIONS.BANK.CREATE),
+    isAdmin.value || hasPermission(PERMISSIONS.BANK.CREATE),
   )
   const canUpdateBank = computed(() =>
-    isAdmin.value && hasPermission(PERMISSIONS.BANK.UPDATE),
+    isAdmin.value || hasPermission(PERMISSIONS.BANK.UPDATE),
   )
   const canDeleteBank = computed(() =>
-    isAdmin.value && hasPermission(PERMISSIONS.BANK.DELETE),
+    isAdmin.value || hasPermission(PERMISSIONS.BANK.DELETE),
   )
 
   // Vérifier les permissions pour BRANCH
   const canReadBranch = computed(() =>
-    isAdmin.value && hasPermission(PERMISSIONS.BRANCH.READ),
+    isAdmin.value || hasPermission(PERMISSIONS.BRANCH.READ),
   )
   const canCreateBranch = computed(() =>
-    isAdmin.value && hasPermission(PERMISSIONS.BRANCH.CREATE),
+    isAdmin.value || hasPermission(PERMISSIONS.BRANCH.CREATE),
   )
   const canUpdateBranch = computed(() =>
-    isAdmin.value && hasPermission(PERMISSIONS.BRANCH.UPDATE),
+    isAdmin.value || hasPermission(PERMISSIONS.BRANCH.UPDATE),
   )
   const canDeleteBranch = computed(() =>
-    isAdmin.value && hasPermission(PERMISSIONS.BRANCH.DELETE),
+    isAdmin.value || hasPermission(PERMISSIONS.BRANCH.DELETE),
   )
 
   // Vérifier les permissions pour USER
   const canReadUser = computed(() =>
-    isAdmin.value && hasPermission(PERMISSIONS.USER.READ),
+    isAdmin.value || hasPermission(PERMISSIONS.USER.READ),
   )
   const canCreateUser = computed(() =>
-    isAdmin.value && hasPermission(PERMISSIONS.USER.CREATE),
+    isAdmin.value || hasPermission(PERMISSIONS.USER.CREATE),
   )
   const canUpdateUser = computed(() =>
-    isAdmin.value && hasPermission(PERMISSIONS.USER.UPDATE),
+    isAdmin.value || hasPermission(PERMISSIONS.USER.UPDATE),
   )
   const canDeleteUser = computed(() =>
-    isAdmin.value && hasPermission(PERMISSIONS.USER.DELETE),
+    isAdmin.value || hasPermission(PERMISSIONS.USER.DELETE),
   )
   const canLockUser = computed(() =>
-    isAdmin.value && hasPermission(PERMISSIONS.USER.LOCK),
+    isAdmin.value || hasPermission(PERMISSIONS.USER.LOCK),
   )
   const canUnlockUser = computed(() =>
-    isAdmin.value && hasPermission(PERMISSIONS.USER.UNLOCK),
+    isAdmin.value || hasPermission(PERMISSIONS.USER.UNLOCK),
   )
   const canValidateUser = computed(() =>
-    isAdmin.value && hasPermission(PERMISSIONS.USER.VALIDATE),
+    isAdmin.value || hasPermission(PERMISSIONS.USER.VALIDATE),
   )
 
   return {
